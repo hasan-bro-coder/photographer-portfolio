@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 import node from "@astrojs/node";
 import netlify from "@astrojs/netlify";
 import { loadEnv } from "vite";
+import vercel from "@astrojs/vercel";
 const { SANITY_STUDIO_PROJECT_ID, SANITY_STUDIO_DATASET } = loadEnv(
   import.meta.env.MODE,
   process.cwd(),
@@ -16,13 +17,13 @@ const { SANITY_STUDIO_PROJECT_ID, SANITY_STUDIO_DATASET } = loadEnv(
 const projectId = SANITY_STUDIO_PROJECT_ID;
 const dataset = SANITY_STUDIO_DATASET;
 
-console.log(projectId, dataset);
 
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  adapter: netlify(),
+  // adapter: netlify(),
   // adapter: node({ mode: "standalone" }),
+  adapter: vercel(),
   integrations: [
     sanity({
       projectId,
