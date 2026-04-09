@@ -1,0 +1,51 @@
+---
+---
+<div id="about-con" class="con w-screen h-screen relative overflow-hidden">
+<section id="about" class="absolute dark w-screen h-[120vh] flex justify-center items-center">
+    <div id="about-container" class="flex w-[80%] max-h-64 gap-8">
+        <img class="about-image" src="pfp.jpg"></img>
+        <div id="separator"></div>
+        <div class="flex flex-col gap-2">
+            <h1 class="text-3xl font-bold">About Me</h1>
+            <h2 class="works text-xl">photographer</h2>
+            <p class="mt-4">Hi, im <span class="font-colitezserif">Hasan</span> based on Dhaka,Bangladesh <br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto, quaerat odit quis eveniet, aliquid ipsa consequatur, temporibus numquam quasi recusandae fugit rem earum! Sapiente, dicta! Accusamus assumenda officiis impedit beatae!</p>
+        </div>
+    </div>
+</section>
+</div>
+<script>
+//   import gsap from "gsap";
+//   import { ScrollTrigger } from "gsap/ScrollTrigger";
+//   gsap.registerPlugin(ScrollTrigger);
+//   gsap.to("#about", {
+//     scrollTrigger: {
+//       start: "top+=90 top",
+//       trigger: "#about-con",
+//       scrub: true,
+//     //   markers: true,
+//     },
+//     y: 350,
+//   });
+</script>
+
+<style>
+    #separator{
+        background-color: white;
+        width: 1px;
+        height: 100%;
+    }
+    #about-container{
+        display: grid;
+        grid-template-columns: 1fr 1px 2fr;
+        grid-template-rows: 1fr;
+        /* place-items: center; */
+    }
+    nav {
+        z-index: 100;
+    }
+    svg {
+        fill: white;
+        width: 32px;
+        height: 32px;
+    }
+</style>

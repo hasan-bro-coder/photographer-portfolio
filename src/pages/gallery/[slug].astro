@@ -1,0 +1,96 @@
+---
+// import type { InferGetStaticParamsType } from "astro";
+// import { PortableText } from "astro-portabletext";
+// import Layout from "../../layouts/Layout.astro";
+// import { formatDate } from "../../utils";
+// import { urlFor } from "../../utils/image";
+import { getGallery, getAllGallery } from "../../utils/sanity";
+import Layout from "../../layouts/Layout.astro";
+import Contact from "../../components/contact.astro";
+import type { InferGetStaticParamsType } from "astro";
+import { urlFor } from "../../utils/image";
+
+export async function getStaticPaths() {
+  const posts = await getAllGallery();
+  return posts.map((post) => ({
+    params: { slug: encodeURI(post.slug.current) },
+  }));
+}
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+const { slug } = Astro.params as Params;
+
+const images = await getGallery(slug);
+
+export const prerender = false
+---
+
+<Layout title="Gallery">
+  <main class="dark min-h-screen pt-24 pb-16 px-6 md:px-12">
+    <header id="gallery-header" class="text-center mb-16 md:mb-32">
+      <h1
+        class="text-4xl md:text-5xl tracking-widest uppercase mb-4 font-serif"
+      >
+        Memories Captured
+      </h1>
+      <p class="text-[#d9c5b2]/60 text-sm md:text-base max-w-lg mx-auto italic">
+        A curation of moments from the world.
+      </p>
+    </header>
+
+    <div
+      class="gallery-wrapper max-w-7xl mx-auto columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4"
+    >
+      {
+          images && images.gallery?.map((item) => (
+            <div class="gallery-item break-inside-avoid opacity-0 translate-y-8 group overflow-hidden border border-[#d9c5b2]/10 shadow-lg cursor-pointer bg-[#5a483b]">
+              <img
+                src={urlFor(item.asset).url()}
+                alt={item.caption}
+                loading="lazy"
+                class="w-full h-auto object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+              />
+            </div>
+          ))
+      }
+    </div>
+
+    <div class="mt-20 flex justify-center opacity-30">
+      <span class="inline-block border-b border-[#d9c5b2] w-12"></span>
+    </div>
+  </main>
+  <Contact />
+</Layout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initGalleryAnimation = () => {
+    ScrollTrigger.getAll().forEach((t) => t.kill());
+    const items = document.querySelectorAll(".gallery-item");
+
+    if (items.length > 0) {
+      ScrollTrigger.refresh();
+
+      ScrollTrigger.batch(".gallery-item", {
+        start: "top 95%",
+        end: "bottom 5%", // Triggers when the bottom of the image reaches 5% from the top
+        onEnter: (batch) =>
+          gsap.to(batch, { opacity: 1, y: 0, stagger: 0.1, overwrite: true }),
+        onLeave: (batch) =>
+          gsap.to(batch, { opacity: 0, y: -20, overwrite: true }), // Fades out when scrolling up past it
+        onEnterBack: (batch) =>
+          gsap.to(batch, { opacity: 1, y: 0, stagger: 0.1, overwrite: true }),
+        onLeaveBack: (batch) =>
+          gsap.to(batch, { opacity: 0, y: 20, overwrite: true }), // Fades out when scrolling down past it
+      });
+    }
+  };
+
+  initGalleryAnimation();
+  document.addEventListener("astro:after-swap", initGalleryAnimation);
+  document.addEventListener("astro:page-load", initGalleryAnimation);
+</script>
