@@ -1,7 +1,6 @@
 import { sanityClient } from "sanity:client";
 import type { ImageAsset, Slug } from "@sanity/types";
 import groq from "groq";
-import type { SanityImageObject } from "@sanity/image-url";
 
 export async function getAllGallery(): Promise<GalleryPost[]> {
   return await sanityClient.fetch(

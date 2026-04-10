@@ -20,7 +20,8 @@ const dataset = SANITY_STUDIO_DATASET;
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'static',
+  site: 'https://photographer-portfolio-blush-theta.vercel.app',
+  output: 'server',
   // adapter: netlify(),
   // adapter: node({ mode: "standalone" }),
   adapter: vercel(),

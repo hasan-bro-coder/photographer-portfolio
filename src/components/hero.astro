@@ -2,13 +2,15 @@
 
 ---
 
-<div class="con w-screen h-screen relative overflow-hidden">
-  <main id="hero" class="w-screen h-screen overflow-hidden fixed">
+<div class="con w-screen h-screen relative">
+  <main id="hero" class="w-screen h-screen fixed">
     <img
       src="hero.jpg"
-      alt="hero image"
+      alt="Hero banner - Hasanur Rahman professional photographer capturing memories"
       id="hero-image"
       class="w-screen h-screen object-fill"
+      loading="eager"
+      fetchpriority="high"
     />
     <!-- <div class="absolute top-[70vh] md:left-8 left-4"> -->
     <div
@@ -22,11 +24,12 @@
     </div>
   </main>
 </div>
-<script>
-  import gsap from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  gsap.registerPlugin(ScrollTrigger);
+<script>
+  // import gsap from "gsap";
+  // import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  // gsap.registerPlugin(ScrollTrigger);
   // gsap.to("#hero", {
   // // gsap.to("#hero-image", {
   //   scrollTrigger: {
@@ -36,14 +39,14 @@
   //   },
   //   y: 350,
   // });
-  //   gsap.to("#main-con", {
-  //     scrollTrigger: {
-  //       start: "top top",
-  //       trigger: "#hero-image",
-  //       scrub: true,
-  //     },
-  //     y: 150,
-  //   });
+    // gsap.to("#hero", {
+    //   scrollTrigger: {
+    //     start: "top top",
+    //     trigger: "#hero",
+    //     scrub: true,
+    //   },
+    //   y: 150,
+    // });
 </script>
 
 <style>

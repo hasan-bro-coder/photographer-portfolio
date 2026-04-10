@@ -1,51 +1,94 @@
 ---
 ---
-<div id="about-con" class="con w-screen h-screen relative overflow-hidden">
-<section id="about" class="absolute dark w-screen h-[120vh] flex justify-center items-center">
-    <div id="about-container" class="flex w-[80%] max-h-64 gap-8">
-        <img class="about-image" src="pfp.jpg"></img>
-        <div id="separator"></div>
-        <div class="flex flex-col gap-2">
-            <h1 class="text-3xl font-bold">About Me</h1>
-            <h2 class="works text-xl">photographer</h2>
-            <p class="mt-4">Hi, im <span class="font-colitezserif">Hasan</span> based on Dhaka,Bangladesh <br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto, quaerat odit quis eveniet, aliquid ipsa consequatur, temporibus numquam quasi recusandae fugit rem earum! Sapiente, dicta! Accusamus assumenda officiis impedit beatae!</p>
-        </div>
+<div id="about-con" class="con w-screen h-[150vh] relative flex justify-center items-center">
+  <section
+    id="about"
+    class="dark w-screen h-[150vh] flex justify-center items-center"
+  >
+    <div
+      id="about-container"
+      class="flex w-[80%] max-h-64 gap-8 about-content"
+    >
+      <img
+        class="about-image"
+        src="pfp.jpg"
+        alt="Hasanur Rahman - Professional Photographer"
+        loading="lazy"
+      />
+      <div id="separator"></div>
+      <div class="flex flex-col gap-2 about-text">
+        <h2 class="text-3xl font-bold">About Me</h2>
+        <p class="works text-xl">Professional Photographer</p>
+        <p class="mt-4">
+          Hi, I'm <span class="font-colitezserif">Hasan</span>, based in Dhaka,
+          Bangladesh. With a passion for freezing moments in time, I specialize
+          in capturing the essence and emotions of every frame. Whether it's
+          portraits, events, or landscapes, I bring creativity and technical
+          expertise to every project. My goal is to tell your story through
+          beautiful, timeless photography.
+        </p>
+      </div>
     </div>
-</section>
+  </section>
 </div>
+
 <script>
-//   import gsap from "gsap";
-//   import { ScrollTrigger } from "gsap/ScrollTrigger";
-//   gsap.registerPlugin(ScrollTrigger);
-//   gsap.to("#about", {
-//     scrollTrigger: {
-//       start: "top+=90 top",
-//       trigger: "#about-con",
-//       scrub: true,
-//     //   markers: true,
-//     },
-//     y: 350,
-//   });
+  import {gsap} from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#about",
+      start: "top 10%",
+      end: "bottom top",
+      scrub: 0.8,
+    },
+  });
+
+  tl.from(".about-image", {
+  //   opacity: 0,
+    scale: 0.8,
+    rotation: -10,
+    y: 30,
+    ease: "back.out(1.5)",
+  }).from(
+    ".about-text",
+    {
+      // opacity: 0,
+      x: 40,
+      ease: "power3.out",
+    },
+    "<0.1" // slight offset, starts almost with image
+  );
 </script>
 
 <style>
-    #separator{
-        background-color: white;
-        width: 1px;
-        height: 100%;
-    }
-    #about-container{
-        display: grid;
-        grid-template-columns: 1fr 1px 2fr;
-        grid-template-rows: 1fr;
-        /* place-items: center; */
-    }
-    nav {
-        z-index: 100;
-    }
-    svg {
-        fill: white;
-        width: 32px;
-        height: 32px;
-    }
+  .about-content {
+    opacity: 1; /* removed the opacity:0 — GSAP handles it via `from` */
+  }
+  #separator {
+    background-color: white;
+    width: 1px;
+    height: 100%;
+  }
+  #about-container {
+    display: grid;
+    grid-template-columns: 1fr 1px 2fr;
+    grid-template-rows: 1fr;
+  }
+  nav {
+    z-index: 100;
+  }
+  svg {
+    fill: white;
+    width: 32px;
+    height: 32px;
+  }
+  .about-image {
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+  /* REMOVED the conflicting CSS slideIn animation on .about-text */
 </style>

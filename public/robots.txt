@@ -1,0 +1,12 @@
+# Robots.txt for photographer portfolio
+User-agent: *
+Allow: /
+Disallow: /studio
+Disallow: /admin
+Disallow: /private
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://photographer-portfolio-blush-theta.vercel.app/sitemap.xml

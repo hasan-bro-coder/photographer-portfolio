@@ -1,16 +1,15 @@
 ---
 ---
 <nav id="navbar" transition:persist transition:animate="none" class="fixed top-0 flex justify-between md:px-8 px-4 items-center w-screen h-12">
-    <div id="nav-name">
-        Hasanur Rahman
+    <div id="nav-name" class="font-colitezserif">
+        <a href="/" title="Hasanur Rahman Professional Photography">Hasanur Rahman</a>
     </div>
     <div id="nav-links" class="flex sm:gap-8 gap-4">
-        <a href="/" class="sm:inline">Home</a>
-        <a href="/#about-con" class="hidden sm:inline">About</a>
-        <a href="/gallery" class="sm:inline">Gallery</a>
-        <!-- <a href="">Contact</a> -->
+        <a href="/" class="sm:inline" title="Home">Home</a>
+        <a href="/#about-con" class="hidden sm:inline" title="About Me">About</a>
+        <a href="/gallery" class="sm:inline" title="Photography Gallery">Gallery</a>
     </div>
-    <a href="#contact" class="dark rounded-sm p-1 px-2" id="contact-button">Contact Me</a>
+    <a href="#contact-section" class="dark rounded-sm p-1 px-2" id="contact-button" title="Contact Me">Contact Me</a>
    
 
     <!-- <div id="nav-social-links" class="flex">
@@ -25,6 +24,9 @@
         mix-blend-mode: difference;
         /* background-color: rgba(0, 0, 0, 0.142); */
         /* backdrop-filter: blur(5px); */
+    }
+    a:hover{
+        color: gray;
     }
     svg {
         fill: rgb(255, 255, 255);

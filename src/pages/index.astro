@@ -4,11 +4,43 @@ import Contact from '../components/contact.astro';
 import Gallery from '../components/gallery.astro';
 import Hero from '../components/hero.astro';
 import Layout from '../layouts/Layout.astro';
+
+const seoData = {
+  title: 'Hasanur Rahman - Professional Photographer | Portfolio',
+  description: 'Explore stunning photography by Hasanur Rahman. Professional photographer specializing in capturing memories and moments. Based in Dhaka, Bangladesh.',
+  keywords: 'photographer, photography, professional, portfolio, Hasanur Rahman, Dhaka, Bangladesh, portraits, events, galleries'
+};
 ---
 
-<Layout title='Demo Portfolio'>
+<Layout 
+  title={seoData.title}
+  description={seoData.description}
+  keywords={seoData.keywords}
+  canonicalURL={import.meta.env.BASE_URL}
+>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Hasanur Rahman",
+      "jobTitle": "Professional Photographer",
+      "description": "Professional photographer capturing memories and moments",
+      "url": "https://photographer-portfolio-blush-theta.vercel.app",
+      "image": "https://photographer-portfolio-blush-theta.vercel.app/pfp.jpg",
+      "sameAs": [
+        "https://instagram.com",
+        "https://twitter.com"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "email": "contact@photographer-portfolio.com"
+      }
+    }
+  </script>
+
 	<Hero></Hero>
-	<About></About>
-	<Gallery></Gallery>
+	<About></About> 
+	<Gallery></Gallery> 
 	<Contact></Contact>
 </Layout>

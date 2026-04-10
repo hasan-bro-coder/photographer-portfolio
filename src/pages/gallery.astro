@@ -6,11 +6,34 @@ import { urlFor } from "../utils/image";
 import { getAllGallery } from "../utils/sanity";
 const gallery = await getAllGallery();
 export const prerender = false
+
+const seoData = {
+  title: 'Photography Gallery | Hasanur Rahman',
+  description: 'Browse our curated photography gallery featuring lifestyle, events, portraits and more. Each gallery is a collection of carefully selected memorable moments.',
+  keywords: 'photography gallery, photo collections, memories, gallery albums, professional photography, Hasanur Rahman'
+};
 ---
 
-<Layout title="Gallery">
-  <main class="dark min-h-screen pt-32 pb-16 px-6 md:px-12">
-    
+<Layout 
+  title={seoData.title}
+  description={seoData.description}
+  keywords={seoData.keywords}
+  canonicalURL= {import.meta.env.BASE_URL + "/gallery"}
+>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Photography Gallery",
+      "description": "Professional photography gallery collections",
+      "url":  "https://photographer-portfolio-blush-theta.vercel.app/gallery",
+      "creator": {
+        "@type": "Person",
+        "name": "Hasanur Rahman"
+      }
+    }
+  </script>
+  <main class="dark min-h-screen pt-64 pb-16 px-6 md:px-12">
     <header class="text-center mb-20">
       <h1 class="text-white font-ztotez text-4xl md:text-5xl tracking-[0.2em] uppercase mb-4">
         Gallery
@@ -24,11 +47,13 @@ export const prerender = false
           <a 
             href={`/gallery/${encodeURI(category.slug.current || "")}`} 
             class="category-card group relative aspect-square overflow-hidden  border border-[#d9c5b2]/10 shadow-xl opacity-0 translate-y-4"
+            title={`View ${category.title} gallery collection`}
           >
             <img 
               src={urlFor(category.mainImage.asset).url()}
-              alt={category.title}
+              alt={`${category.title} - Click to view full gallery collection`}
               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+              loading="lazy"
             />
 
             <div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-500"></div>
@@ -48,6 +73,7 @@ export const prerender = false
         ))
       }
     </div>
+  </main>
 
   </main>
   <Contact />

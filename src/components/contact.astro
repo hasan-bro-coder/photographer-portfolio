@@ -3,12 +3,14 @@
 ---
 
 <div
-  id="contact"
-  class="con w-screen min-h-screen h-[150vh] md:h-screen relative overflow-hidden dark"
-  transition:persist transition:animate="none"
+  id="contact-section"
+  class="con w-screen h-[120vh] md:h-screen relative dark flex justify-center items-center"
 >
-  <section id="contact" class="w-screen py-24 flex flex-col items-center">
-    <h1 class="text-6xl mt-8 mb-16">Contact</h1>
+  <section id="contact" class="w-screen pb-32 flex flex-col items-center">
+    <h2 class="text-6xl mt-8 mb-8">Get In Touch</h2>
+    <p class="text-[#d9c5b2]/70 mb-16 text-center max-w-md">
+      Interested in working together? Send me a message and I'll get back to you as soon as possible.
+    </p>
 
     <form
       id="contact-form"
@@ -16,40 +18,48 @@
       data-netlify="true"
       netlify-honeypot="bot-field"
       method="post"
-      onsubmit="alert('form sent successfully')"
+      name="contact"
     >
       <input type="hidden" name="contact-form" value="contact" />
+      <p class="hidden">
+        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+      </p>
       <div class="mb-6 break-inside-avoid">
-        <label class="block text-sm mb-2 opacity-60">Name</label>
+        <label for="name" class="block text-sm mb-2 opacity-60">Name</label>
         <input
           type="text"
+          id="name"
           name="name"
           required
+          aria-required="true"
           class="w-full bg-transparent border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:border-white/60 transition-colors"
         />
       </div>
 
       <div class="mb-6 break-inside-avoid">
-        <label class="block text-sm mb-2 opacity-60">Email</label>
+        <label for="email" class="block text-sm mb-2 opacity-60">Email</label>
         <input
           type="email"
+          id="email"
           name="email"
           required
+          aria-required="true"
           class="w-full bg-transparent border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:border-white/60 transition-colors"
         />
       </div>
 
       <div class="mb-6 break-inside-avoid">
-        <label class="block text-sm mb-2 opacity-60">Subject</label>
+        <label for="subject" class="block text-sm mb-2 opacity-60">Subject</label>
         <input
           type="text"
+          id="subject"
           name="subject"
           class="w-full bg-transparent border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:border-white/60 transition-colors"
         />
       </div>
 
       <div class="mb-6 break-inside-avoid md:col-span-2">
-        <label class="block text-sm mb-2 opacity-60">Message</label>
+        <label for="message" class="block text-sm mb-2 opacity-60">Message</label>
         <textarea
           name="message"
           rows="5"
@@ -78,41 +88,38 @@
   </section>
 </div>
 
-
 <style>
-  .g-recaptcha{
+  .g-recaptcha {
     margin-bottom: 8px;
     background-color: #1b1d1e;
     filter: invert(100) hue-rotate(180deg) saturate(60%);
   }
-
 </style>
 
-
 <script>
-  // const form = document.getElementById("contact-form") as HTMLFormElement;
-  // const status = document.getElementById("form-status")!;
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const status = document.getElementById("form-status")!;
 
-  // form.addEventListener("submit", async (e) => {
-  //   e.preventDefault();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  //   const data = new FormData(form);
+    const data = new FormData(form);
 
-  //   // --- Option 1: Formspree (easiest, free tier available) ---
-  //   // 1. Sign up at formspree.io
-  //   // 2. Create a form and get your endpoint
-  //   // 3. Replace the URL below
-  //   const res = await fetch("https://formspree.io/f/maqlprrk", {
-  //     method: "POST",
-  //     body: data,
-  //     headers: { Accept: "application/json" },
-  //   });
+    // --- Option 1: Formspree (easiest, free tier available) ---
+    // 1. Sign up at formspree.io
+    // 2. Create a form and get your endpoint
+    // 3. Replace the URL below
+    const res = await fetch("https://formspree.io/f/"+import.meta.env.FORMSPREE_ID, {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" },
+    });
 
-  //   if (res.ok) {
-  //     status.textContent = "Message sent!";
-  //     form.reset();
-  //   } else {
-  //     status.textContent = "Something went wrong. Try again.";
-  //   }
-  // });
+    if (res.ok) {
+      status.textContent = "Message sent!";
+      form.reset();
+    } else {
+      status.textContent = "Something went wrong. Try again.";
+    }
+  });
 </script>
